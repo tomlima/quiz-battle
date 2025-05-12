@@ -1,0 +1,93 @@
+@{
+    @model QuizViewModel
+}
+<section class="quiz">
+    <div class="container">
+        
+        <div class="quiz__wrapper">
+            <div class="quiz__header internal__padding">
+                <div>
+                    <h1>@Model.Quiz.Title</h1>
+                    <p>
+                        @Model.Quiz.Description
+                    </p>
+                </div>
+                <a href="/quizz/@Model.Quiz.Id?index=1&started=true" id="start-quiz" class="btn btn--orange">
+                    Começar
+                    <img src="/images/icons/start.png" alt="Começar">
+                </a>
+            </div>
+
+            <!-- ..............................
+            /
+            /    Quizz information section 
+            /
+            ................................ -->
+            @{
+                if (!Model.QuizStarted)
+                {
+                    <div class="quiz__inner internal__padding">
+                        <div class="quiz__info">
+                            <img src="/images/icons/time.png" alt="Tempo de duração">
+                            <h2>
+                                Tempo de duração: <span class="orange"> @Model.Quiz.Time minutos </span>
+                            </h2>
+                        </div>
+                        <div class="quiz__info">
+                            <img src="/images/icons/shield-1.png" alt="Dificuldade">
+                            <h2>
+                                Dificuldade: <span class="orange">@Model.Quiz.Difficulty</span>
+                            </h2>
+                        </div>
+                        <div class="quiz__info">
+                            <img src="/images/icons/question.png" alt="Perguntas">
+                            <h2>
+                                Perguntas: <span class="orange">
+                                    @Model.Quiz.Questions.Count
+                                </span>
+                            </h2>
+                        </div>
+                        <div class="info info--tip">
+                            <img src="/images/icons/info.png" alt="Tip">
+                            <p>Há somente uma resposta correta para cada pergunta.</p>
+                        </div>
+                    </div>
+                }
+            }
+
+
+            <!-- ..............................
+            /
+            /    Quizz game section 
+            /
+            ................................ -->
+            @{
+                if (Model.QuizStarted)
+                {
+                    <div class="quiz__game">
+                        <div class="container">
+                            <div class="quiz__game__wrapper">
+                            
+                                <h3>@Model.Question.Text</h3>
+                                @if (Model.Question.Answers.Count > 0)
+                                {
+                                    foreach (var answer in @Model.Question.Answers)
+                                    {
+                                        <div>
+                                            <input id="answer-@answer.Id" type="radio" name="answer" value="@answer.Text">
+                                            <label for="answer-@answer.Id">@answer.Text</label>
+                                        </div>
+                                    }
+                                }
+
+                                <a id="next-question" href="/quizz/@Model.Quiz.Id?index=@(Model.QuestionIndex + 1)&started=true" class="btn btn--blue">
+                                    Próxima pergunta
+                                </a>
+                            </div>
+                        </div>
+                    </div>       
+                }
+            }
+        </div>
+    </div>
+</section>

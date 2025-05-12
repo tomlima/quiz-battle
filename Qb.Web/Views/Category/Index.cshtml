@@ -1,0 +1,99 @@
+@{
+    ViewData["Title"] = "Qb";
+    @model CategoryViewModel
+    var categoryImage = "/images/icons/" + Model.Category.Icon + ".png";
+}
+
+<section class="category">
+    <div class="category__menu">
+        <div class="container">
+            <div class="category__wrapper">
+                <div class="category__title">
+                    <img src="@categoryImage">
+                    <h1>@Model.Category.Name</h1>
+                </div>
+                <div class="category__filters">
+                    <div class="category__search">
+                        <input type="text" value="Buscar">
+                        <img src="/images/icons/search.png" alt="">
+                    </div>
+                    <div class="category__filter">
+                        <img src="/images/icons/filter.png" alt="">
+                    </div>
+                    <div class="category__sponsor">
+                        <img src="/images/sponsor/hbo.png">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="category__list">
+            @if (Model.Quizzes.Count() > 0)
+            {
+                var count = 0;
+                @foreach (var quizz in Model.Quizzes)
+                {   
+                    
+                    @if(count == 6)
+                    {
+                        @await Component.InvokeAsync("Cupom")
+
+                    }
+                    
+                    <div href="@quizz.Title" class="card">
+                        <div class="card__thumb">
+                            <img src="/images/quizz/@quizz.Image" alt="Quiz">
+                        </div>
+                        <div class="card__info">
+                            <span>
+                                <img src="/images/icons/time.png" alt="Tempo de duração">
+                                @quizz.Time min
+                            </span>
+                            <span>
+                                @{
+                                    @if (@quizz.Difficulty.ToString() == "Easy")
+                                    {
+                                        <img src="/images/icons/easy.png">
+                                    }
+                                    @if (@quizz.Difficulty.ToString() == "Medium")
+                                    {
+                                        <img src="/images/icons/medium.png">
+                                    }
+                                    @if (@quizz.Difficulty.ToString() == "Hard")
+                                    {
+                                        <img src="/images/icons/hard.png">
+                                    }
+                                }
+                                @quizz.Difficulty
+                            </span>
+                        </div>
+                        <div>
+                            <h3>@quizz.Title</h3>
+                            <p>@quizz.Description</p>
+                        </div>
+                        
+                        <div class="card__buttons">
+                            <a href="@Url.Action("Index", "Quizz", new { id = @quizz.Id })" class="btn btn--blue-2">Acessar</a>
+                            @{
+                                if (Model.IsLoggedIn)
+                                {
+                                    <a href="@Url.Action("Index", "Quizz", new { id = @quizz.Id })" class="btn btn--orange">Desafiar amigo</a>
+                                }
+                                else
+                                {
+                                    <a href="@Url.Action("Index", "Quizz", new { id = @quizz.Id })" class="btn btn--orange is-blocked">
+                                        Desafiar amigo
+                                        <img class="lock" src="/images/icons/lock.png" alt="Trancado">
+                                    </a>
+                                }
+                            }
+                        </div>
+                    </div>
+                    count++;
+                }
+            }
+        </div>
+    </div>
+</section>

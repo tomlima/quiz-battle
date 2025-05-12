@@ -1,0 +1,57 @@
+@model Qb.Web.Models.TemplateViewModel
+
+<header class="header js-header">
+    <nav
+        class="nav container l-flex u-justify-content-between u-align-items-center"
+    >
+        <a class="nav__logo l-flex  u-align-items-center" href="/">
+            Quiz
+            <img src="/images/logo.png" alt="Logo" />
+            Battles
+        </a>
+        <div class="nav__menu js-nav__menu">
+            <ul class="nav__list l-flex u-align-items-center">
+                <h2>
+                    Categorias
+                    <img src="/images/icons/list.png" alt="Logo" />
+                </h2>
+                @if (Model.Categories.Count() > 0)
+                {
+                    @foreach (var category in Model.Categories)
+                    {
+                        <li class="nav__item" link-for="submenu-@category.Id">
+                            <a class="nav__link" href="@category.Slug">@category.Name</a>
+                        </li>
+                    }
+                }
+            </ul>
+
+            <div class="nav__close js-nav__close">
+                <img src="~/images/icons/close.png" alt="">
+            </div>
+        </div>
+
+        <div class="nav__buttons">
+            <div class="nav__login">
+                @if (!Model.IsLoggedIn)
+                {
+                    <a href="/login">
+                        <img src="~/images/icons/login.png" alt="Login">
+                    </a>
+                }
+                else
+                {
+                    <a class="avatar" href="/user/@Model.UserSession.Id">
+                        <img src="~/images/avatar/@Model.UserSession.Avatar">
+                    </a>
+                    <a href="/Logout">
+                        <img src="~/images/icons/logout.png">
+                    </a>
+                }
+            </div>
+            <div class="nav__toggle js-nav__toggle">
+                <img  src="~/images/icons/menu.png"  alt="">
+            </div>
+        </div>
+    </nav>
+</header>

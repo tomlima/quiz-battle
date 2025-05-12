@@ -1,0 +1,31 @@
+<section class="login">
+    <div class="container">
+        <div class="login__form">
+            <img class="login__image" src="/images/icons/lock-account.png" alt="Login">
+            <h1>
+                Faça login
+            </h1>
+            <p>E aproveite todos os recursos que o Battle Quiz oferece.</p>
+            <form action="#" id="login">
+                <input name="email" type="email" placeholder="Email">
+                <input name="password" type="password" placeholder="Password">
+                <button type="submit" class="btn btn--blue" id="login-button">
+                    Entrar
+                    <img class="loading" src="/images/icons/loading.png" alt="Carregando" id="login-loader">
+                </button>
+                <div class="login__error info info--error" id="login-error">
+                    <img src="/images/icons/error.png" alt="Falha no login">
+                    <p>
+                        Usuário ou senha incorretos.
+                    </p>
+                </div>
+            </form>
+            <div class="login__links">
+                <p>Ainda não tem conta? crie a sua <a href="#">aqui</a> </p>
+                <a href="#">Esqueci minha senha</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="/js/login.js"></script>

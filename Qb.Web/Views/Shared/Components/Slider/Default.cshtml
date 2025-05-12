@@ -1,0 +1,53 @@
+@using Qb.Domain.Entities
+@model List<Quiz>
+
+<section class="featured" id="slider">
+    <h2>Destaques da semana</h2>
+    @{
+        var count = 1;
+    }
+    <div class="featured__wrapper">
+        
+        @foreach (var quiz in Model)
+        {
+            var isActive = count == 1 ? "is-active" : "";
+            var imageSrc = "/images/quizz/" + quiz.Image;
+
+            <div href="@quiz.Title" class="card">
+                <div class="card__thumb">
+                    <img src="/images/quizz/@quiz.Image" alt="Quiz">
+                </div>
+                <div class="card__info">
+                    <span>
+                        <img src="/images/icons/time.png" alt="Tempo de duração">
+                        @quiz.Time min
+                    </span>
+                    <span>
+                        @{
+                            @if (@quiz.Difficulty.ToString() == "Easy")
+                            {
+                                <img src="/images/icons/easy.png">
+                            }
+
+                            @if (@quiz.Difficulty.ToString() == "Medium")
+                            {
+                                <img src="/images/icons/medium.png">
+                            }
+
+                            @if (@quiz.Difficulty.ToString() == "Hard")
+                            {
+                                <img src="/images/icons/hard.png">
+                            }
+                        }
+                        @quiz.Difficulty
+                    </span>
+                </div>
+                <div>
+                    <h3>@quiz.Title</h3>
+                    <p>@quiz.Description</p>
+                </div>
+            </div>
+            count++;
+        }
+    </div>
+</section>

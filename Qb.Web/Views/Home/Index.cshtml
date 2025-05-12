@@ -1,0 +1,11 @@
+﻿@{
+    ViewData["Title"] = "Qb";
+    @model HomeViewModel
+}
+
+<section class="container">
+    @if (Model.Quizzes.Count() > 0)
+    {
+        @await Component.InvokeAsync("Slider", Model.Quizzes)
+    }
+</section>

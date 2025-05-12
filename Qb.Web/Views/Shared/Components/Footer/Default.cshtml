@@ -1,0 +1,51 @@
+@model Qb.Web.Models.TemplateViewModel
+
+<footer>
+    <div class="container">
+        <div class="wrapper">
+            <div class="wrapper__section">
+                <h3>
+                    Quiz
+                    <img src="/images/logo.png" alt="Logo" />
+                    Battles
+                </h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A asperiores debitis nemo quibusdam ratione voluptatem! Alias assumenda blanditiis, doloremque pariatur quo quod ratione vitae! Consectetur doloribus dolorum illum nemo quisquam.</p>
+            </div>
+            <div class="wrapper__section">
+                <h3>Quizes</h3>
+                <ul>
+                    @if (Model.Categories.Count() > 0)
+                    {
+                        @foreach (var category in Model.Categories)
+                        {
+                            <li  link-for="submenu-@category.Id">
+                                <a  href="@category.Slug">@category.Name</a>
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
+            <div class="wrapper__section">
+                <h3>Links úteis</h3>
+                <ul>
+                    <li><a href="#">Política de privacidade</a></li>
+                    <li><a href="#">NZN</a></li>
+                    <li><a href="#">Ajuda</a></li>
+                    <li><a href="#">Contato</a></li>
+                </ul>
+            </div>
+            <div class="wrapper__section">
+                <h3>Links úteis</h3>
+                <ul>
+                    <li><a href="#">Política de privacidade</a></li>
+                    <li><a href="#">NZN</a></li>
+                    <li><a href="#">Ajuda</a></li>
+                    <li><a href="#">Contato</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="copyright">
+        <p class="copyright__text">&copy; 2024 - Quiz Battles</p>
+    </div>
+</footer>

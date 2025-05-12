@@ -1,0 +1,9 @@
+**/obj/
+**/bin
+.idea/
+
+# Ignore all files in Migrations folder
+Qb.Infrastructure/Migrations/*
+
+# But keep the folder by not ignoring .gitkeep or .gitignore inside it
+!Qb.Infrastructure/Migrations/.gitkeep
